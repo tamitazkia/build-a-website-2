@@ -1,24 +1,22 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
-import WeatherImage from "../components/WeatherImage";
-import "../App.css";
+import { useHistory } from "react-router-dom";
 
-// TODO
-// - implement API
-// - add props to details screen
-// - style the details screen
+// import Header from "../components/Header";
+// import WeatherImage from "../components/WeatherImage";
 
-function Details() {
+import City from "../components/City";
+const weatherKey = `e436b43bda1e6f235a6143b958400338`
+function Home() {
   const history = useHistory();
+
   const [weatherData, setWeatherData] = useState(null);
-  const [city, setCity] = useState("Jakarta");
+  const [city, setCity] = useState("Jakarta")
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_WEATHER_KEY);
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_WEATHER_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherKey}`
       )
       .then(function (response) {
         // Successful request
@@ -27,7 +25,7 @@ function Details() {
       })
       .catch(function (error) {
         // The best practice of coding is to not use console.log
-        console.log(error);
+        console.warn(error);
       });
   }, [city]);
 
@@ -40,61 +38,23 @@ function Details() {
     }
   }, [history]);
 
-  const {
-    cloudiness,
-    currentTemp,
-    highTemp,
-    humidity,
-    lowTemp,
-    weatherType,
-    windSpeed,
-  } = useMemo(() => {
-    let cloudiness = "";
+  const { currentTemp } = useMemo(() => {
     let currentTemp = "";
-    let highTemp = "";
-    let humidity = "";
-    let lowTemp = "";
-    let weatherType = "";
-    let windSpeed = "";
-
     if (weatherData) {
-      cloudiness = `${weatherData.clouds.all}%`;
       currentTemp = `${Math.round(weatherData.main.temp)}°C`;
-      highTemp = `${Math.round(weatherData.main.temp_max)}°C`;
-      humidity = `${weatherData.main.humidity}%`;
-      lowTemp = `${Math.round(weatherData.main.temp_min)}°C`;
-      weatherType = `${weatherData.weather[0].description}`;
-      windSpeed = `${weatherData.wind.speed} mph`;
     }
-
     return {
-      cloudiness,
       currentTemp,
-      highTemp,
-      humidity,
-      lowTemp,
-      weatherType,
-      windSpeed,
     };
   }, [weatherData]);
 
+
   return (
     // Container
-    <div className="flex flex-col items-center h-screen bg-green-200">
-      <div className="p-8 text-2xl font-bold">Weather in {city}</div>
-
-      <div className="flex flex-col p-8 m-4 border-2 rounded-md border-gray-700 items-center">
-        <div>{weatherType}</div>
-        <WeatherImage weatherType={weatherType} className="weatherImg"/>
-      </div>
-
-      <div>High Temperature : {highTemp}</div>
-      <div>Cloudiness : {cloudiness}</div>
-      <div>Low Temperature : {lowTemp}</div>
-      <div>Humidity : {humidity}</div>
-      <div>Wind Speed : {windSpeed}</div>
+    <div className="flex flex-col h-screen bg-green-200 font">
+      <City cityName={city} temp={currentTemp} color={"bg-yellow-500"} />
     </div>
   );
 }
 
-export default Details;
+export default Home;

@@ -1,26 +1,38 @@
 import React from "react";
-// import {  FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
 
-/* 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
-    TODO
+  faCloud,
+  faCloudRain,
+  faSun,
+  faSmog,
+  faWind,
 } from "@fortawesome/free-solid-svg-icons";
-*/
 
 function WeatherImage({ weatherType }) {
-  // switch (weatherType) {
-  //  case "TODO":
-  //    return <FontAwesomeIcon icon={TODO} />;
+  switch (weatherType) {
+    case "clear sky":
+      return <FontAwesomeIcon icon={faSun} size="4x" />;
 
-  //  case "TODO":
-  //    return <FontAwesomeIcon icon={TODO} />;
+    case "light rain":
+      return <FontAwesomeIcon icon={faCloudRain} size="4x" />;
 
-  //  case "TODO":
-  //    return <FontAwesomeIcon icon={TODO} />;
+    case "overcast clouds":
+      return <FontAwesomeIcon icon={faSmog} size="4x" />;
 
-  //  default:
-  //    return <FontAwesomeIcon icon={TODO} />;
-  // }
+    case "few clouds":
+      return <FontAwesomeIcon icon={faCloud} size="4x" />;
+
+    case "broken clouds":
+      return <FontAwesomeIcon icon={faCloud} size="4x" />;
+
+    case "moderate rain":
+      return <FontAwesomeIcon icon={faCloudRain} size="4x" />;
+
+    default:
+      return <FontAwesomeIcon icon={faWind} size="4x" />;
+  }
 }
 
 export default WeatherImage;

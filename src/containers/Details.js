@@ -12,7 +12,7 @@ import "../App.css";
 function Details() {
   const history = useHistory();
   const [weatherData, setWeatherData] = useState(null);
-  const [city, setCity] = useState("Jakarta");
+  const [city, setCity] = useState("");
 
   useEffect(() => {
     console.log(process.env.REACT_APP_WEATHER_KEY);
@@ -34,7 +34,7 @@ function Details() {
   useEffect(() => {
     const searchParams = history.location.search;
     const urlParams = new URLSearchParams(searchParams);
-    const city = urlParams.get("city");
+    const city = urlParams.get("name");
     if (city) {
       setCity(city);
     }
@@ -84,8 +84,9 @@ function Details() {
       <div className="p-8 text-2xl font-bold">Weather in {city}</div>
 
       <div className="flex flex-col p-8 m-4 border-2 rounded-md border-gray-700 items-center">
+        <WeatherImage weatherType={weatherType} className="text-xl" />
         <div>{weatherType}</div>
-        <WeatherImage weatherType={weatherType} className="weatherImg"/>
+        <div>Current Temperature : {currentTemp}</div>
       </div>
 
       <div>High Temperature : {highTemp}</div>
