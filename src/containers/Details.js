@@ -80,20 +80,25 @@ function Details() {
 
   return (
     // Container
-    <div className="flex flex-col items-center h-screen bg-green-200">
-      <div className="p-8 text-2xl font-bold">Weather in {city}</div>
+    <div className="flex flex-col h-screen text-center md:text-left items-center bg-repeat bg-gray-300 font-mono">
+      <div className="items-center p-8 m-4 mb-10 text-lime-800 text-5xl font-bold flex ">Weather in {city}</div>
+      
+      <div className="flex flex-col md:flex-row" >
+        <div className="flex flex-col flex-initial p-8 m-4 border-2 rounded-md border-gray-800 items-center hover:bg-white hover:shadow-lg hover:border-transparent transform hover:scale-110 transition duration-700 ease-in-out motion-reduce:transform-none">
+          <WeatherImage weatherType={weatherType} className="text-5xl" />
+          <div>{weatherType}</div>
+          <div className="text-3xl text-center font-bold group-hover:text-gray-900">Current <br></br> Temperature : {currentTemp}</div>
+        </div>
 
-      <div className="flex flex-col p-8 m-4 border-2 rounded-md border-gray-700 items-center">
-        <WeatherImage weatherType={weatherType} className="text-xl" />
-        <div>{weatherType}</div>
-        <div>Current Temperature : {currentTemp}</div>
+        <div className="flex flex-col text-gray-500 hover:text-gray-900 text-2xl md:flex-col p-8 m-4 border-0 rounded-md hover:bg-white hover:shadow-lg hover:border-transparent">
+          <div>High Temperature : {highTemp}</div>
+          <div>Cloudiness       : {cloudiness}</div>
+          <div>Low Temperature  : {lowTemp}</div>
+          <div>Humidity         : {humidity}</div>
+          <div>Wind Speed       : {windSpeed}</div>
+        </div>
       </div>
 
-      <div>High Temperature : {highTemp}</div>
-      <div>Cloudiness : {cloudiness}</div>
-      <div>Low Temperature : {lowTemp}</div>
-      <div>Humidity : {humidity}</div>
-      <div>Wind Speed : {windSpeed}</div>
     </div>
   );
 }
