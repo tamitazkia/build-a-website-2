@@ -11,12 +11,12 @@ function City({ cityName, temp, color }) {
 
   return (
     <button
-      className={"flex flex-col p-8 justify-between items-center " + color}
+      className={"flex flex-col flex-initial box-content h-32 w-32 p-4 m-10 border-transparent bg-yellow-200 rounded-md items-center hover:bg-green-500 shadow-2xl hover:border-transparent text-green-500 hover:text-yellow-200 cursor-pointer"}
       onClick={handleClick}
     >
-      <div className="flex flex-col flex-initial p-8 m-4 border-transparent bg-yellow-200 rounded-md items-center hover:bg-green-500 shadow-2xl hover:border-transparent text-green-500 hover:text-yellow-200 cursor-pointer">
-        <div className="text-3xl font-bold">{cityName}</div>
-        <div className="text-4xl">{temp}</div>
+      <div>
+        <div className="text-3xl items-center font-bold">{cityName}</div>
+        <div className="text-4xl items-center">{temp}</div>
       </div>
     </button>
   );
