@@ -75,7 +75,7 @@ function Home() {
       fetchWeatherData(citiesItems.name).then((res) => {
         weatherData = res;
 
-        newCities[index].currentTemp = `${Math.round(weatherData.main.temp)}°C`;
+        newCities[index].currentTemp = weatherData.main.temp;
         newCities[index].weatherType = weatherData.weather[0].main;
         setCities(newCities);
       });
